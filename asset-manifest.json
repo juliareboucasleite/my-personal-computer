@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "./static/css/main.39565911.css",
+    "main.js": "./static/js/main.82e7901d.js",
+    "static/js/453.8836b4ef.chunk.js": "./static/js/453.8836b4ef.chunk.js",
+    "static/media/MinecraftRegular-Bmg3.otf": "./static/media/MinecraftRegular-Bmg3.82ba08919dc2add9422f.otf",
+    "index.html": "./index.html",
+    "main.39565911.css.map": "./static/css/main.39565911.css.map",
+    "main.82e7901d.js.map": "./static/js/main.82e7901d.js.map",
+    "453.8836b4ef.chunk.js.map": "./static/js/453.8836b4ef.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.39565911.css",
+    "static/js/main.82e7901d.js"
+  ]
+}
