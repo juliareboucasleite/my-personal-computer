@@ -15,7 +15,7 @@ function MyPcConfigRenderer({ appRef }) {
 							<img src="icons/selfie.png" style={{ width: "140px", height: "140px" }}></img>
 						</div>
 						<div className="my-pc-title2-container">
-							<a className="my-pc-title">Stefani</a>
+							<a className="my-pc-title">Julia Rebouças</a>
 							<a>She/Her ➧ Engenheira Informatica ➧ 18y </a>
 						</div>
 					</div>
