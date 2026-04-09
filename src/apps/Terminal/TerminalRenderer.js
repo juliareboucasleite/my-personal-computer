@@ -16,7 +16,7 @@ const commands = {
 	[exit.name]: exit,
 };
 
-const DIRECTORY = "C:\\Users\\rwboucas>";
+const DIRECTORY = "C:\\Users\\juliareboucasleite>";
 const COLORS = ["red", "green", "blue", "purple", "pink", "white", "yellow"];
 
 function TerminalRenderer({ appCoreRef }) {
@@ -26,7 +26,7 @@ function TerminalRenderer({ appCoreRef }) {
 	const terminalInput = useRef();
 	const terminalRef = useRef();
 	const terminalInputRef = useRef();
-	const terminalContainerRef = useRef();
+	const terminalLogRef = useRef();
 
 	function clearTerminal() {
 		setTerminalLog(["type /help to see all commands avaliable."]);
@@ -65,7 +65,9 @@ function TerminalRenderer({ appCoreRef }) {
 	}, []);
 
 	useEffect(() => {
-		terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
+		if (terminalLogRef.current) {
+			terminalLogRef.current.scrollTop = terminalLogRef.current.scrollHeight;
+		}
 	}, [terminalLog]);
 
 	useEffect(() => {
@@ -78,10 +80,16 @@ function TerminalRenderer({ appCoreRef }) {
 				const input = terminalInputRef.current.value;
 				terminalInput.current = input;
 
-				const command = input.split(" ")[0];
+				const trimmedInput = input.trim();
+				if (!trimmedInput) {
+					setTerminalText();
+					return;
+				}
+
+				const command = trimmedInput.split(" ")[0];
 				if (command in commands) {
 					writeToTerminal(null, true, false);
-					commands[command].exec(terminalRef, input);
+					commands[command].exec(terminalRef, trimmedInput);
 				} else {
 					writeToTerminal(`The provided command ${command} does not exist. Type /help to see the list of commands available.`, true, true);
 				}
@@ -100,12 +108,14 @@ function TerminalRenderer({ appCoreRef }) {
 	}, [terminalInputRef]);
 
 	return (
-		<div className="terminal-renderer-container" ref={terminalContainerRef}>
-			{terminalLog.map((line, index) => (
-				<div style={{ color: inputColor, fontSize: "16px", lineHeight: "1.5" }} key={index}>
-					{line}
-				</div>
-			))}
+		<div className="terminal-renderer-container">
+			<div className="terminal-log-container" ref={terminalLogRef}>
+				{terminalLog.map((line, index) => (
+					<div style={{ color: inputColor, fontSize: "16px", lineHeight: "1.5" }} key={index}>
+						{line}
+					</div>
+				))}
+			</div>
 
 			<div className="input-container">
 				<span className="fixed-text" style={{ color: inputColor }}>
