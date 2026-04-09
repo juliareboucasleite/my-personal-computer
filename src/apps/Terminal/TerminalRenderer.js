@@ -17,7 +17,7 @@ const commands = {
 	[exit.name]: exit,
 };
 
-const DIRECTORY = "C:\\Users\\Stefani>";
+const DIRECTORY = "C:\\Users\\rwboucas>";
 const COLORS = ["red", "green", "blue", "purple", "pink", "white", "yellow"];
 
 function TerminalRenderer({ appCoreRef }) {
