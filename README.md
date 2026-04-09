@@ -1,4 +1,5 @@
  <h1>My Personal Online Computer</h1>
+https://juliareboucasleite.github.io/my-personal-computer/
 
   <br>
   <a>Welcome to my personal information project! This page serves as a showcase of my work and interests. I have a deep love for old computers (I even own one!), which brings me back to nostalgic memories of the good old days.
