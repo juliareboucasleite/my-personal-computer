@@ -7,6 +7,26 @@ function DoomRenderer({ appCoreRef }) {
 	const containerRef = useRef(null);
 
 	useEffect(() => {
+		if (!containerRef.current) {
+			return;
+		}
+
+		let removeOpenStateListener = null;
+		let dosInstance = null;
+		let isUnmounted = false;
+
+		const stopDos = () => {
+			if (!dosInstance) {
+				return;
+			}
+
+			try {
+				dosInstance.stop();
+			} catch (_) {}
+
+			dosInstance = null;
+		};
+
 		const shadowRoot = containerRef.current.shadowRoot || containerRef.current.attachShadow({ mode: "open" });
 		while (shadowRoot.firstChild) {
 			shadowRoot.removeChild(shadowRoot.firstChild);
@@ -24,9 +44,32 @@ function DoomRenderer({ appCoreRef }) {
 			}
 		`;
 
-		window.appCoreRef_DoomRenderer = appCoreRef;
+		const ensureDosScriptLoaded = () => {
+			if (typeof window.Dos === "function") {
+				return Promise.resolve();
+			}
+
+			return new Promise((resolve, reject) => {
+				let script = document.querySelector("script[data-jsdos-script='true']");
+
+				if (!script) {
+					script = document.createElement("script");
+					script.src = "https://v8.js-dos.com/latest/js-dos.js";
+					script.async = true;
+					script.dataset.jsdosScript = "true";
+					document.head.appendChild(script);
+				}
+
+				script.addEventListener("load", resolve, { once: true });
+				script.addEventListener("error", reject, { once: true });
+			});
+		};
 
 		requestAnimationFrame(() => {
+			if (isUnmounted) {
+				return;
+			}
+
 			const div = document.createElement("div");
 			div.id = "DOOM";
 
@@ -39,42 +82,44 @@ function DoomRenderer({ appCoreRef }) {
 
 			div.appendChild(link);
 
-			// Load JS inside Shadow DOM
-			const script = document.createElement("script");
-			script.textContent = `
-				if (window.dos) {
-					try { dos.stop(); } catch (_) {}
-				}
-
-				window.dos = undefined;
-				window.appCoreRef_DoomRenderer.current.onAppCoreOpenStateChanged((isOpened) => {
-					if (isOpened) {
+			ensureDosScriptLoaded()
+				.then(() => {
+					if (isUnmounted || typeof window.Dos !== "function") {
 						return;
-					} 
+					}
 
-					try { dos.stop(); } catch (_) {}
+					removeOpenStateListener = appCoreRef?.current?.onAppCoreOpenStateChanged?.((isOpened) => {
+						if (!isOpened) {
+							stopDos();
+						}
+					});
 
-					// Cleanup
-					delete window.dos;
+					const doomUrl = `${process.env.PUBLIC_URL || ""}/doom.jsdos`;
+
+					dosInstance = window.Dos(div, {
+						autoStart: true,
+						kiosk: true,
+						noNetworking: true,
+						noCloud: true,
+						url: doomUrl,
+					});
+				})
+				.catch(() => {
+					if (!isUnmounted) {
+						div.innerHTML = '<p style="color:white;padding:12px">Failed to load Doom engine.</p>';
+					}
 				});
-
-				window.dos = Dos(document.getElementById("DOOM-CONTAINER").shadowRoot.querySelector("#DOOM"), {
-					autoStart: true,
-					kiosk: true,
-					noNetworking: true,
-					noCloud: true,
-					url: "https://cdn.dos.zone/custom/dos/doom.jsdos",
-				});
-			`;
-
-			div.appendChild(script);
 		});
 
 		shadowRoot.appendChild(style);
 		shadowRoot.appendChild(container);
 
 		return () => {
-			window.appCoreRef_DoomRenderer = null;
+			isUnmounted = true;
+			stopDos();
+			if (typeof removeOpenStateListener === "function") {
+				removeOpenStateListener();
+			}
 		};
 	}, []);
 
