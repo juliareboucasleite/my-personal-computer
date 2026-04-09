@@ -28,7 +28,7 @@ function MyPcSetupRenderer({ appRef }) {
 			</div>
 			<div className="my-pc-renderer-container-2">
 				<div className="my-pc-info-father2-container">
-					<div className="my-pc-setup-info-container">Mouse Katar Pro Wireless <br/>Headset Corsair Virtuoso <br/>Monitor LG Ultrawide 34wr50qc-b</div>
+					<div className="my-pc-setup-info-container">Mouse Katar Pro Wireless <br/>Headset JBL 720T <br/>Monitor Acer Nitro 144Hz</div>
 				    <div className="my-pc-setup-info-container">Keyboard Razer 60% Hutsmini <br/>Mousepad Custom</div>
 				</div>
 			</div>
