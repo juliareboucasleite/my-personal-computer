@@ -12,7 +12,7 @@ const questions = [
 	{ question: "A curiosity about you?", answer: "I learned graphic design when I was 13, during my free time on the internet, it was a way for me to express myself creatively, and I carry that with me to this day. You can see some of my work in my portfolio on behance (raikali) " },
 ];
 
-const label = "type ask and the number. Ex: ask 1";
+const label = "Type a number to ask a question. Ex: 1 (or ask 1)";
 
 module.exports = {
 	name: "ask",
@@ -26,7 +26,8 @@ module.exports = {
 
 			terminalRef.current.writeToTerminal(null, false, true);
 		} else {
-			const index = Number(input.split(" ")[1]);
+			const parts = input.trim().split(" ");
+			const index = Number(parts.length === 1 ? parts[0] : parts[1]);
 			if (index - 1 < questions.length && index >= 1) {
 				terminalRef.current.writeToTerminal(questions[index - 1].answer, false, true);
 			} else {

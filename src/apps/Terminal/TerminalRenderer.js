@@ -26,7 +26,7 @@ function TerminalRenderer({ appCoreRef }) {
 	const terminalInput = useRef();
 	const terminalRef = useRef();
 	const terminalInputRef = useRef();
-	const terminalLogRef = useRef();
+	const terminalContainerRef = useRef();
 
 	function clearTerminal() {
 		setTerminalLog(["type /help to see all commands avaliable."]);
@@ -65,8 +65,8 @@ function TerminalRenderer({ appCoreRef }) {
 	}, []);
 
 	useEffect(() => {
-		if (terminalLogRef.current) {
-			terminalLogRef.current.scrollTop = terminalLogRef.current.scrollHeight;
+		if (terminalContainerRef.current) {
+			terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
 		}
 	}, [terminalLog]);
 
@@ -90,6 +90,9 @@ function TerminalRenderer({ appCoreRef }) {
 				if (command in commands) {
 					writeToTerminal(null, true, false);
 					commands[command].exec(terminalRef, trimmedInput);
+				} else if (/^\d+$/.test(trimmedInput)) {
+					writeToTerminal(null, true, false);
+					commands.ask.exec(terminalRef, trimmedInput);
 				} else {
 					writeToTerminal(`The provided command ${command} does not exist. Type /help to see the list of commands available.`, true, true);
 				}
@@ -108,14 +111,12 @@ function TerminalRenderer({ appCoreRef }) {
 	}, [terminalInputRef]);
 
 	return (
-		<div className="terminal-renderer-container">
-			<div className="terminal-log-container" ref={terminalLogRef}>
-				{terminalLog.map((line, index) => (
-					<div style={{ color: inputColor, fontSize: "16px", lineHeight: "1.5" }} key={index}>
-						{line}
-					</div>
-				))}
-			</div>
+		<div className="terminal-renderer-container" ref={terminalContainerRef}>
+			{terminalLog.map((line, index) => (
+				<div style={{ color: inputColor, fontSize: "16px", lineHeight: "1.5" }} key={index}>
+					{line}
+				</div>
+			))}
 
 			<div className="input-container">
 				<span className="fixed-text" style={{ color: inputColor }}>
