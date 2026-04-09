@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet";
 import "./DoomRenderer.css";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -14,6 +13,7 @@ function DoomRenderer({ appCoreRef }) {
 		let removeOpenStateListener = null;
 		let dosInstance = null;
 		let isUnmounted = false;
+		let blobUrl = null;
 
 		const stopDos = () => {
 			if (!dosInstance) {
@@ -25,6 +25,15 @@ function DoomRenderer({ appCoreRef }) {
 			} catch (_) {}
 
 			dosInstance = null;
+		};
+
+		const clearBlobUrl = () => {
+			if (!blobUrl) {
+				return;
+			}
+
+			URL.revokeObjectURL(blobUrl);
+			blobUrl = null;
 		};
 
 		const shadowRoot = containerRef.current.shadowRoot || containerRef.current.attachShadow({ mode: "open" });
@@ -83,7 +92,7 @@ function DoomRenderer({ appCoreRef }) {
 			div.appendChild(link);
 
 			ensureDosScriptLoaded()
-				.then(() => {
+				.then(async () => {
 					if (isUnmounted || typeof window.Dos !== "function") {
 						return;
 					}
@@ -95,13 +104,21 @@ function DoomRenderer({ appCoreRef }) {
 					});
 
 					const doomUrl = `${process.env.PUBLIC_URL || ""}/doom.jsdos`;
+					const bundleResponse = await fetch(doomUrl, { cache: "no-store" });
+
+					if (!bundleResponse.ok) {
+						throw new Error("Failed to fetch Doom bundle");
+					}
+
+					const bundleBytes = await bundleResponse.arrayBuffer();
+					blobUrl = URL.createObjectURL(new Blob([bundleBytes], { type: "application/octet-stream" }));
 
 					dosInstance = window.Dos(div, {
 						autoStart: true,
 						kiosk: true,
 						noNetworking: true,
 						noCloud: true,
-						url: doomUrl,
+						url: blobUrl,
 					});
 				})
 				.catch(() => {
@@ -117,6 +134,7 @@ function DoomRenderer({ appCoreRef }) {
 		return () => {
 			isUnmounted = true;
 			stopDos();
+			clearBlobUrl();
 			if (typeof removeOpenStateListener === "function") {
 				removeOpenStateListener();
 			}
