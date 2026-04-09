@@ -161,18 +161,18 @@ function App() {
 									title="spotify"
 									x={0}
 									y={3}
-									href="https://open.spotify.com/user/22mrt5ov3taytdsgwmnfkmory?si=32b3f2cea68c4958"
+									href="https://open.spotify.com/user/bszsjd9zoosu8ljz50w89na4o?si=4128bff8a06e4eaf"
 								/>
 								<IconDisplay
 									icon="icons/instagram.png"
 									title="instagram"
 									x={0}
 									y={1}
-									href="https://www.instagram.com/ste16bit?igsh=a21uamRwcWF2cDIw&utm_source=qr"
+									href="https://www.instagram.com/rwboucas?igsh=a21uamRwcWF2cDIw&utm_source=qr"
 								/>
-								<IconDisplay icon="icons/x.png" title="twitter" x={0} y={2} href="https://twitter.com/ste_16bit" />
-								<IconDisplay icon="icons/github.png" title="github" x={0} y={5} href="https://github.com/stefani16bit" />
-								<IconDisplay icon="icons/steam.png" title="steam" x={0} y={4} href="https://steamcommunity.com/profiles/76561198316392663" />
+								<IconDisplay icon="icons/x.png" title="twitter" x={0} y={2} href="https://twitter.com/leeksxy" />
+								<IconDisplay icon="icons/github.png" title="github" x={0} y={5} href="https://github.com/juliareboucasleite" />
+								<IconDisplay icon="icons/steam.png" title="steam" x={0} y={4} href="https://steamcommunity.com/id/leeksxy/" />
 
 								<Terminal
 									iconX={14.5}
