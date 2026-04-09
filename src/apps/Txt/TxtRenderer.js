@@ -8,8 +8,8 @@ function TxtRenderer({ appCoreRef }) {
 				<br />
 			</div>
 			<a>
-				My name is Stefani, I'm a brazillian girl, currently on my last year of Computer Science. At the moment, I work remotely as a full-stack
-				developer at Thoughtworks.{" "}
+				My name is Stefani, I'm a brazillian girl and I'm an informatics engineer. My main stacks are Node.js, Python and C#, and I'm learning
+				Java and Kotlin.{" "}
 			</a>
 			<div className="app-txt-renderer-selfie">
 				<a>

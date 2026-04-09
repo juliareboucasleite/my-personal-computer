@@ -1,5 +1,5 @@
 const questions = [
-	{ question: "How old are you?", answer: "I'm am 22 years old." },
+	{ question: "How old are you?", answer: "I'm 18 years old." },
 	{ question: "Where are you from?", answer: "I'm from São Paulo, Brazil." },
 	{ question: "What are your favorite subjects?", answer: "I could spend hours talking about anthropology and science." },
 	{ question: "What's your favorite music genre?", answer: "I really like bass garage and drum & bass, but sometimes I listen to indie music. You can check my spotify on the desktop." },

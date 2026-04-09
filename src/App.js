@@ -235,7 +235,7 @@ function App() {
 									color: "white",
 								}}
 							>
-								stefani16bit ©
+								juliareboucasleite ©
 							</div>
 						</div>
 					) : (

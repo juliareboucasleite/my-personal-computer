@@ -16,13 +16,13 @@ function MyPcConfigRenderer({ appRef }) {
 						</div>
 						<div className="my-pc-title2-container">
 							<a className="my-pc-title">Stefani</a>
-							<a>She/Her ➧ Computer Science ➧ 22y ➧ Developer </a>
+							<a>She/Her ➧ Engenheira Informatica ➧ 18y </a>
 						</div>
 					</div>
 					<div className="my-pc-info-container-2">
 						<div className="my-pc-title2-container">
 							<a className="my-pc-title-2">Stacks:</a>
-							<a>Typescript/Javascript, Java, Python, SQL</a>
+							<a>Node.js, Python, C# (aprendendo Java e Kotlin)</a>
 						</div>
 					</div>
 				</div>
