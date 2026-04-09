@@ -6,23 +6,23 @@ function MyPcConfigRenderer({ appRef }) {
 	return (
 		<div className="my-pc-renderer-container">
 			<div className="my-pc-renderer-title-container">
-				<a className="my-pc-renderer-title">ABOUT ME</a>
+				<span className="my-pc-renderer-title">ABOUT ME</span>
 			</div>
 			<div className="my-pc-renderer-container-2">
 				<div className="my-pc-info-father-container">
 					<div className="my-pc-info-container">
 						<div>
-							<img src="icons/selfie.png" style={{ width: "140px", height: "140px" }}></img>
+							<img src="icons/selfie.png" style={{ width: "140px", height: "140px" }} alt="Self portrait" />
 						</div>
 						<div className="my-pc-title2-container">
-							<a className="my-pc-title">Julia Rebouças</a>
-							<a>She/Her ➧ Engenheira Informatica ➧ 18y </a>
+							<span className="my-pc-title">Julia Rebouças</span>
+							<span>She/Her ➧ Engenheira Informatica ➧ 18y </span>
 						</div>
 					</div>
 					<div className="my-pc-info-container-2">
 						<div className="my-pc-title2-container">
-							<a className="my-pc-title-2">Stacks:</a>
-							<a>Node.js, Python, C# (aprendendo Java e Kotlin)</a>
+							<span className="my-pc-title-2">Stacks:</span>
+							<span>Node.js, Python, C# (aprendendo Java e Kotlin)</span>
 						</div>
 					</div>
 				</div>

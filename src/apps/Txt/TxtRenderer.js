@@ -7,17 +7,17 @@ function TxtRenderer({ appCoreRef }) {
 			<div>
 				<br />
 			</div>
-			<a>
+			<p>
 				My name is Julia Rebouças, I'm a brazillian girl and I'm an informatics engineer. My main stacks are Node.js, Python and C#, and I'm learning
 				Java and Kotlin.{" "}
-			</a>
+			</p>
 			<div className="app-txt-renderer-selfie">
-				<a>
+				<p>
 					I have a huge love for retro tech, including old computers, CRTs and videogames, honestly, I think my mind is stuck in the 2000's, I can't
 					let go of the nostalgia, the ascension of the internet, everything that was made at that time, has a special place in my heart. It's strange
 					to see how computers evolved in such a short time, and I'm glad to have grown up with this. Anyway, I even own a sleeper pc. That's why I
 					decided to create this page.
-				</a>
+				</p>
 			</div>
 			<div>
 				<br />

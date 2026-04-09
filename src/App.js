@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import "./App.css";
 
@@ -45,19 +45,22 @@ function App() {
 	const [isBrowserOpened, setIsBrowserOpened] = useState(false);
 	const [isPaintOpened, setIsPaintOpened] = useState(false);
 
-	const appsStateMap = {
-		terminal: { ref: terminalRef, isOpened: isTerminalOpened, setIsOpened: setIsTerminalOpened },
-		txt: { ref: txtRef, isOpened: isTxtOpened, setIsOpened: setIsTxtOpened },
-		mypc: { ref: myPcRef, isOpened: isMyPcOpened, setIsOpened: setIsMyPcOpened },
-		doom: { ref: doomRef, isOpened: isDoomOpened, setIsOpened: setIsDoomOpened },
-		browser: { ref: browserRef, isOpened: isBrowserOpened, setIsOpened: setIsBrowserOpened },
-		paint: { ref: paintRef, isOpened: isPaintOpened, setIsOpened: setIsPaintOpened },
-	};
+	const appsStateMap = useMemo(
+		() => ({
+			terminal: { ref: terminalRef, isOpened: isTerminalOpened, setIsOpened: setIsTerminalOpened },
+			txt: { ref: txtRef, isOpened: isTxtOpened, setIsOpened: setIsTxtOpened },
+			mypc: { ref: myPcRef, isOpened: isMyPcOpened, setIsOpened: setIsMyPcOpened },
+			doom: { ref: doomRef, isOpened: isDoomOpened, setIsOpened: setIsDoomOpened },
+			browser: { ref: browserRef, isOpened: isBrowserOpened, setIsOpened: setIsBrowserOpened },
+			paint: { ref: paintRef, isOpened: isPaintOpened, setIsOpened: setIsPaintOpened },
+		}),
+		[isTerminalOpened, isTxtOpened, isMyPcOpened, isDoomOpened, isBrowserOpened, isPaintOpened]
+	);
 
 	useEffect(() => {
 		const registeredStateListeners = [];
 
-		for (const [key, { ref, setIsOpened }] of Object.entries(appsStateMap)) {
+		for (const [, { ref, setIsOpened }] of Object.entries(appsStateMap)) {
 			if (ref?.current) {
 				registeredStateListeners.push(
 					ref.current.onAppCoreOpenStateChanged((isOpened) => {
@@ -70,7 +73,7 @@ function App() {
 		return () => {
 			registeredStateListeners.forEach((removeListener) => removeListener());
 		};
-	}, [terminalRef, txtRef, myPcRef, doomRef, isScreenTurnedOn, browserRef, paintRef]);
+	}, [appsStateMap, isScreenTurnedOn]);
 
 	useEffect(() => {
 		function onClick({ x, y }) {
@@ -108,7 +111,7 @@ function App() {
 		<div className="main" id="computer-main">
 			{!isScreenTurnedOn && (
 				<div className="lock-computer-crt-container">
-					<img className="glitch-screen-effect" src="icons/glitch.gif" />
+					<img className="glitch-screen-effect" src="icons/glitch.gif" alt="" />
 					<div className="out-light" />
 					<div className="shadow" />
 					<div className="lock-computer-screen-container" ref={appsDisplayParentRef}>
@@ -137,7 +140,7 @@ function App() {
 								})}
 							</div>
 
-							<img className="computer-screen-background" src="icons/bg1.gif" style={{ width: "100%", height: "100%", overflow: "hidden" }} />
+							<img className="computer-screen-background" src="icons/bg1.gif" style={{ width: "100%", height: "100%", overflow: "hidden" }} alt="" />
 
 							<div
 								className="computer-screen-icons-container"
@@ -271,7 +274,7 @@ function App() {
 					</div>
 
 					<div className="computer-case-fans-container">
-						<img src="icons/fans.png" style={{ width: "279px", height: "80px" }}></img>
+						<img src="icons/fans.png" style={{ width: "279px", height: "80px" }} alt="" />
 					</div>
 				</div>
 			</div>

@@ -5,7 +5,7 @@ function MyPcSetupRenderer({ appRef }) {
 	return (
 		<div className="my-pc-renderer-container">
 			<div className="my-pc-renderer-title-container">
-				<a className="my-pc-renderer-title">config</a>
+				<span className="my-pc-renderer-title">config</span>
 			</div>
 			<div className="my-pc-renderer-container-2">
 				<div className="my-pc-info-father-container">
@@ -18,13 +18,13 @@ function MyPcSetupRenderer({ appRef }) {
 							NVIDIA GeForce RTX 3050 Laptop GPU GDDR6 4 GB 128 bits
 						</div>
 						<div>
-							<img src="icons/computer.png" style={{ width: "140px", height: "140px" }}></img>
+							<img src="icons/computer.png" style={{ width: "140px", height: "140px" }} alt="Computer setup" />
 						</div>
 					</div>
 				</div>
 			</div>
 			<div className="my-pc-renderer-title-container">
-				<a className="my-pc-renderer-title">setup</a>
+				<span className="my-pc-renderer-title">setup</span>
 			</div>
 			<div className="my-pc-renderer-container-2">
 				<div className="my-pc-info-father2-container">

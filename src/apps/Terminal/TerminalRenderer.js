@@ -7,7 +7,6 @@ import ask from "./Commands/ask";
 import cls from "./Commands/cls";
 import color from "./Commands/color";
 import exit from "./Commands/exit";
-import { useAppsManager } from "../../context/AppsManagerContext";
 
 const commands = {
 	[help.name]: help,
@@ -21,8 +20,6 @@ const DIRECTORY = "C:\\Users\\rwboucas>";
 const COLORS = ["red", "green", "blue", "purple", "pink", "white", "yellow"];
 
 function TerminalRenderer({ appCoreRef }) {
-	const { focusedApp } = useAppsManager();
-
 	const [terminalLog, setTerminalLog] = useState([]);
 	const [inputColor, setInputColor] = useState("white");
 
@@ -46,7 +43,7 @@ function TerminalRenderer({ appCoreRef }) {
 	}
 
 	function setTerminalColor(color) {
-		if (COLORS.indexOf(color) != -1) {
+		if (COLORS.indexOf(color) !== -1) {
 			setInputColor(color);
 		} else {
 			writeToTerminal(`The provided color ${color} does not exist.`, false, true);
@@ -74,7 +71,7 @@ function TerminalRenderer({ appCoreRef }) {
 	useEffect(() => {
 		if (terminalInputRef.current) {
 			function onKeyDown(event) {
-				if (event.key != "Enter") {
+				if (event.key !== "Enter") {
 					return;
 				}
 

@@ -6,10 +6,10 @@ function MobileDisclaimer() {
 			<span>Sorry. This page wasn't built to run on mobile devices yet. Please access it from a computer.</span>
 			<div className="mobile-disclaimer-icons" style={{ display: "flex", justifyContent: "center", columnGap: "10px" }}>
 				<a href="https://github.com/juliareboucasleite/my-personal-computer">
-					<img src="icons/github.svg" style={{ width: "30px", height: "30px" }}></img>
+					<img src="icons/github.svg" style={{ width: "30px", height: "30px" }} alt="GitHub" />
 				</a>
 				<a href="https://x.com/leeksxy">
-					<img src="icons/twitter.svg" style={{ width: "30px", height: "30px" }}></img>
+					<img src="icons/twitter.svg" style={{ width: "30px", height: "30px" }} alt="X" />
 				</a>
 			</div>
 		</div>
