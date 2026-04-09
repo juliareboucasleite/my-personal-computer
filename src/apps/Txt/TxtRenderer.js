@@ -8,7 +8,7 @@ function TxtRenderer({ appCoreRef }) {
 				<br />
 			</div>
 			<a>
-				My name is Stefani, I'm a brazillian girl and I'm an informatics engineer. My main stacks are Node.js, Python and C#, and I'm learning
+				My name is Julia Rebouças, I'm a brazillian girl and I'm an informatics engineer. My main stacks are Node.js, Python and C#, and I'm learning
 				Java and Kotlin.{" "}
 			</a>
 			<div className="app-txt-renderer-selfie">
